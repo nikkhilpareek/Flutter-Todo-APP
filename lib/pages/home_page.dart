@@ -23,7 +23,10 @@ class HomePage extends StatelessWidget {
       body: ListView.builder(
         itemCount: ToDoList.length,
         itemBuilder: (BuildContext context, int index) {
-          return TodoList(taskName: ToDoList[index][0]);
+          return TodoList(
+            taskName: ToDoList[index][0],
+            taskCompleted: ToDoList[index][1],
+          );
         },
       ),
     );
