@@ -9,6 +9,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final _controller = TextEditingController();
+
   List ToDoList = [
     ['Learn Web Development', false],
     ['Learn Flutter Development', true],
@@ -18,6 +20,12 @@ class _HomePageState extends State<HomePage> {
   void checkBoxChanged(int index) {
     setState(() {
       ToDoList[index][1] = !ToDoList[index][1];
+    });
+  }
+
+  void saveNewTask() {
+    setState(() {
+      ToDoList.add([_controller.text, false]);
     });
   }
 
@@ -47,7 +55,10 @@ class _HomePageState extends State<HomePage> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: TextField(
+                controller: _controller,
                 decoration: InputDecoration(
+                  hintText: 'Add New ToDo Item',
+                  hintStyle: TextStyle(color: Colors.white),
                   filled: true,
                   fillColor: Colors.deepPurple.shade200,
                   enabledBorder: OutlineInputBorder(
@@ -62,7 +73,10 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          FloatingActionButton(onPressed: () {}, child: const Icon(Icons.add)),
+          FloatingActionButton(
+            onPressed: saveNewTask,
+            child: const Icon(Icons.add),
+          ),
         ],
       ),
     );
